@@ -1,0 +1,34 @@
+# Data Engineering lab pod: Jupyter Notebook (Anaconda) (Algebra Bernays University)
+# Start: Podman Desktop > Pods > Play Kubernetes YAML  (or: podman kube play anaconda_jupyter.yaml)
+# Open the http://127.0.0.1:8888/...?token=... address from the container Logs tab.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jupyter-notebook-anaconda
+spec:
+  containers:
+    - name: jupyter-notebook-anaconda
+      image: continuumio/anaconda3   # several GB – consider pinning a version
+      ports:
+        - containerPort: 8888
+          hostPort: 8888
+          hostIP: 127.0.0.1
+      volumeMounts:
+        - mountPath: /opt/notebooks
+          name: notebook-storage
+      command: ["/bin/bash", "-c", "jupyter notebook --ip=0.0.0.0 --no-browser --allow-root --notebook-dir=/opt/notebooks"]
+  volumes:
+    - name: notebook-storage
+      persistentVolumeClaim:
+        claimName: notebook-storage-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: notebook-storage-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

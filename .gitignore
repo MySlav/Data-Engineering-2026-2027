@@ -1,0 +1,26 @@
+# Student copies (notebooks, SQL scripts, code): EX_5_my_work.ipynb, EX_6_tasks_my_work.sql …
+*_my_work.*
+
+# Solutions are not published before the lab – any file type with SOLUTIONS in the name
+# (add them on purpose with git add -f when you want to publish them)
+*SOLUTIONS*
+
+# Jupyter / Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Passwords and local settings – never in the repository
+.env
+
+# Editors and tools
+.vscode/
+.idea/
+*.log
+
+# Windows / macOS
+Thumbs.db
+desktop.ini
+.DS_Store
