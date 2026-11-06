@@ -9,6 +9,7 @@ The README in each folder explains what is there and how to work with it.
 | Folder | Topic | Environment |
 |---|---|---|
 | [`EX_5/`](EX_5/) | Handling missing values | Jupyter pod |
+| [`EX_6/`](EX_6/) | Data types, loading data, outliers, transactions and indexes | SQL pod |
 
 New exercises will be added to new folders during the semester (`EX_6/`, `EX_7/` …), so pull the newest version before every lab (see below).
 
