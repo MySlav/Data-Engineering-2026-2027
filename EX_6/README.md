@@ -96,7 +96,7 @@ LibreOffice: File → Save As → *Text CSV (.csv)* → tick *Edit filter settin
 
 | Error | Cause | Fix |
 |---|---|---|
-| `missing data for column "engine_hp"` (or another column) | wrong delimiter – the whole line ended up in one column | Options → Delimiter: the one from Notepad |
+| `missing data for column "model"` or `"engine_hp"` (or another column) | the delimiter in Options is not the one in the file – the line was not split into columns | Options → Delimiter: the one from Notepad. Click the `;` in the drop-down list and check that it is shown before OK. The details in View Processes show the command pgAdmin ran (`DELIMITER ','` or `';'`) |
 | `extra data after last expected column` | the file has more columns than the table | check the file: is it really the cars file? |
 | the check says *the header row was loaded as data* | Header was OFF | `TRUNCATE ex6.cars_raw;` and import again with Header ON |
 | the check says *every car is there twice* | you imported twice | `TRUNCATE ex6.cars_raw;` and import once |
