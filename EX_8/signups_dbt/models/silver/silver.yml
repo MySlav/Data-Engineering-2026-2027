@@ -1,0 +1,26 @@
+version: 2
+
+# Documentation and tests of the Silver models.
+# Each test is a data quality rule – the comment says which dimension it checks.
+models:
+  - name: customer_signup
+    description: "Cleaned sign-ups, one row per e-mail. Owner: marketing. Source: raw.customer_signup. Contains PII."
+    columns:
+      - name: full_name
+        description: "Name with extra spaces removed"
+        data_tests:
+          - not_null                  # completeness
+      - name: email
+        description: "PII: lower-cased, validated e-mail – identifies a sign-up"
+        data_tests:
+          - not_null                  # completeness
+          - unique                    # uniqueness
+      - name: country
+        description: "One spelling per country"
+        data_tests:
+          - accepted_values:          # consistency
+              arguments:
+                values: ['Croatia', 'Austria', 'Slovenia']
+      - name: channel
+        description: "Where the person signed up: newsletter, web shop or trade fair"
+        # 🧩 TASK 5: add an accepted_values test (consistency) for channel – copy the one of country above

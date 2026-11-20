@@ -1,0 +1,17 @@
+# Exercise 8 – the Bronze -> Silver -> Gold pipeline of Exercise 4, built with dbt.
+# dbt reads this file first: the project name, where the models and tests are, and how to build them.
+name: signups
+version: "1.0.0"
+profile: signups            # the connection with this name is in profiles.yml
+
+model-paths: ["models"]     # models = SELECT statements, one per .sql file
+test-paths: ["tests"]       # singular tests = SELECT statements that return the BAD rows
+clean-targets: ["target", "logs"]
+
+models:
+  signups:
+    +materialized: view     # every model becomes a VIEW, like CREATE VIEW in Exercise 4
+    silver:
+      +schema: silver       # models in models/silver/ go to schema ex8_silver
+    gold:
+      +schema: gold         # models in models/gold/   go to schema ex8_gold

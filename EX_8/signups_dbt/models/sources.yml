@@ -1,0 +1,12 @@
+version: 2
+
+# Sources = tables that dbt does NOT build: data loaded by someone else.
+# Models read them with {{ source('bronze', 'customer_signup') }} instead of writing raw.customer_signup,
+# so dbt knows where the data comes from and can draw it at the start of the lineage graph.
+sources:
+  - name: bronze
+    description: "Bronze layer: the raw landing zone (schema raw in database transactional). Data exactly as received – everything is text, nothing is validated."
+    schema: raw
+    tables:
+      - name: customer_signup
+        description: "Newsletter, web shop and trade fair sign-ups from CSV exports. Contains PII (names, e-mails, phones)."

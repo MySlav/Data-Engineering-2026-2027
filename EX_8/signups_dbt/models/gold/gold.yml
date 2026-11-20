@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: signups_by_country
+    description: "Sign-ups per country and channel. Owner: marketing. Refreshed daily."
+    columns:
+      - name: country
+        data_tests:
+          - not_null                  # completeness
+      - name: channel
+        data_tests:
+          - not_null                  # completeness
+      - name: signups
+        description: "Number of sign-ups"
+        data_tests:
+          - not_null                  # completeness
+
+  - name: countries_with_many_signups
+    description: "⭐ Countries with at least 3 sign-ups (all channels together)."

@@ -1,0 +1,17 @@
+# Connection to the course database (the SQL pod).
+# dbt finds this file because it is in the folder you run dbt from.
+#
+# host postgres-pgadmin-pod, port 5432 = the SQL pod as the Jupyter pod sees it.
+# (localhost:5433 is only for programs on your Windows computer, e.g. DBeaver – it does not work from Jupyter.)
+signups:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres-pgadmin-pod
+      port: 5432
+      user: myuser
+      password: mypassword    # course database only – in a real project the password comes from an environment variable
+      dbname: transactional
+      schema: ex8             # base schema; the layers get ex8_silver and ex8_gold (see dbt_project.yml)
+      threads: 4

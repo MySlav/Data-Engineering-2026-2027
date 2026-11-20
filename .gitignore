@@ -1,5 +1,6 @@
 # Student copies (notebooks, SQL scripts, code): EX_5_my_work.ipynb, EX_6_tasks_my_work.sql …
 *_my_work.*
+*_my_work/
 
 # Solutions are not published before the lab – any file type with SOLUTIONS in the name
 # (add them on purpose with git add -f when you want to publish them)
@@ -11,6 +12,11 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# dbt: compiled SQL, run logs and installed packages (created by dbt in every project folder)
+target/
+logs/
+dbt_packages/
 
 # Passwords and local settings – never in the repository
 .env

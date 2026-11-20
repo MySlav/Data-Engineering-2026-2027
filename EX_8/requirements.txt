@@ -1,0 +1,3 @@
+# dbt for Exercise 8 – versions pinned so everyone has the same dbt as in class
+dbt-core~=1.12.0
+dbt-postgres~=1.11.0

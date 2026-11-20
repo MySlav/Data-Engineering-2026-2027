@@ -5,8 +5,8 @@ Installation instructions (WSL 2, Podman Desktop, Git) were sent at the start of
 
 | File | What it starts | For which exercises |
 |---|---|---|
-| [`anaconda_jupyter.yaml`](anaconda_jupyter.yaml) | Jupyter Notebook with the Anaconda distribution (pandas, numpy, scipy, matplotlib, seaborn, scikit-learn …) | EX_5 |
-| [`sql_pod.yaml`](sql_pod.yaml) | PostgreSQL 18 + pgAdmin 4 with the course databases | EX_6 |
+| [`anaconda_jupyter.yaml`](anaconda_jupyter.yaml) | Jupyter Notebook with the Anaconda distribution (pandas, numpy, scipy, matplotlib, seaborn, scikit-learn …) | EX_5, EX_8 (dbt) |
+| [`sql_pod.yaml`](sql_pod.yaml) | PostgreSQL 18 + pgAdmin 4 with the course databases | EX_6, EX_7, EX_8 |
 
 ## Starting the Jupyter pod
 
@@ -44,3 +44,9 @@ Next time just start the pod: **Pods → postgres-pgadmin-pod → Start**.
 
 To reset the database to its original state: stop and delete the pod, delete the volume `de-postgres18-data` (Podman Desktop → Volumes) and play the YAML again.
 Then run the preparation script of the exercise (e.g. `EX_6_prep.sql`) again.
+
+## From the Jupyter pod to the database
+
+Programs that run **inside the Jupyter pod** (dbt in Exercise 8, Python with `psycopg`) reach PostgreSQL at
+host **`postgres-pgadmin-pod`**, port **`5432`** – both pods must be running.
+`localhost:5433` works only for programs on your own computer (DBeaver, VS Code …), not from Jupyter.
