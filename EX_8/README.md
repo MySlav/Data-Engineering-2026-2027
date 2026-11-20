@@ -204,6 +204,7 @@ Exam-style: can you explain why the condition goes into `HAVING` and not into `W
 | `source: not found` | the terminal is `sh`, which has no `source` – use a dot: `. /opt/dbt-venv/bin/activate` (or type `bash` first) |
 | `No dbt_project.yml found` | you are in the wrong folder: `cd /opt/notebooks/Data-Engineering-2026-2027/EX_8/signups_dbt_my_work` |
 | `could not translate host name "postgres-pgadmin-pod"` / `Connection refused` | the SQL pod is not running – start it in Podman Desktop |
+| `dbt found two schema.yml entries …` / `… .ipynb_checkpoints/…` | Jupyter's backup copies are read as models – your copy is older than the file `.dbtignore`: run `git pull`, then `cp ../signups_dbt/.dbtignore .` (or `rm -rf models/*/.ipynb_checkpoints`) |
 | `Compilation Error … depends on a node named '…' which was not found` | a typo in `ref('…')` or `source('…', '…')` |
 | `Parsing Error` in a `.yml` file | the indentation is wrong – YAML uses spaces, and the levels must line up exactly |
 | `check_task…` → `ERROR` | a column is missing or named differently – read the comment at the top of the check file |

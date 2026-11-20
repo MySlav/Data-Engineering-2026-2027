@@ -1,0 +1,4 @@
+# Files dbt must not read (same syntax as .gitignore).
+# Jupyter saves a backup copy of every file you edit into .ipynb_checkpoints/ –
+# without this line dbt would read those copies as a second model / a second .yml entry.
+.ipynb_checkpoints/
