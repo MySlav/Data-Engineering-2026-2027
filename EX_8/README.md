@@ -108,7 +108,8 @@ Read the `ERROR` lines and match them with the tests in `models/silver/silver.ym
 | `not_null_customer_signup_email`, `not_null_customer_signup_full_name` | completeness | a sign-up without an e-mail, one without a name |
 | `accepted_values_customer_signup_country__…` | consistency | Croatia written in five ways |
 | `assert_valid_email` | validity | e-mails like `ivan at gmail.com` |
-| `check_task3_silver`, `check_task4_gold`, `check_task7_star` | – | ✅ checks of tasks 3, 4 and 7 – they pass when your models are right |
+| `check_task3_silver`, `check_task4_gold` | – | ✅ checks of tasks 3 and 4 – they pass when your models are right |
+| `check_task7_star` (`WARN`, yellow) | – | ✅ check of the optional task 7 – only a warning until you solve it |
 
 A test is just a `SELECT` that returns the **bad rows** – it passes when it returns none.
 To see the rows: open the test's file in `target/compiled/…` (the path is in the output), copy the query into pgAdmin and run it.
@@ -161,7 +162,8 @@ dbt docs generate --static
 dbt writes the whole documentation – models, columns, descriptions from the `.yml` files, tests, the SQL and the lineage graph – into **one file**:
 `target/static_index.html`.
 
-1. In the Jupyter file browser go to `signups_dbt_my_work/target/`, right-click `static_index.html` → **Download**.
+1. In the Jupyter file browser go to `signups_dbt_my_work/target/`, right-click **`static_index.html`** (about 2.4 MB) → **Download**.
+   Not `index.html` – that one needs the other files of the folder and shows an error about a missing manifest.
 2. Open the downloaded file on your computer (double-click – it opens in your browser).
 3. Click the round button at the bottom right: the **lineage graph** `bronze.customer_signup → customer_signup → signups_by_country`.
    Under *resources* you can hide the tests to see only the models.
@@ -174,7 +176,7 @@ Here both come from the project itself.
 ### 7. ⭐ Optional: countries with at least 3 sign-ups
 
 `models/gold/countries_with_many_signups.sql`: columns `country`, `signups`, only countries with **3 or more** sign-ups (all channels together),
-reading from a model of this project with `ref(...)`. Check: `dbt build` → `check_task7_star` → `PASS`.
+reading from a model of this project with `ref(...)`. Check: `dbt build` → `check_task7_star` → `PASS` (until then it shows `WARN`).
 Exam-style: can you explain why the condition goes into `HAVING` and not into `WHERE`, and which model you read from and why?
 
 ### 8. ✏️ Questions (at home, not submitted)
@@ -207,6 +209,7 @@ Exam-style: can you explain why the condition goes into `HAVING` and not into `W
 | `dbt found two schema.yml entries …` / `… .ipynb_checkpoints/…` | Jupyter's backup copies are read as models – your copy is older than the file `.dbtignore`: run `git pull`, then `cp ../signups_dbt/.dbtignore .` (or `rm -rf models/*/.ipynb_checkpoints`) |
 | `Compilation Error … depends on a node named '…' which was not found` | a typo in `ref('…')` or `source('…', '…')` |
 | `Parsing Error` in a `.yml` file | the indentation is wrong – YAML uses spaces, and the levels must line up exactly |
+| `index.html` shows an error about a missing manifest | you downloaded `index.html` – download **`static_index.html`** instead |
 | `check_task…` → `ERROR` | a column is missing or named differently – read the comment at the top of the check file |
 
 **Cleaning up:** `DROP SCHEMA ex8_silver, ex8_gold CASCADE;` in pgAdmin removes the views. The table `raw.customer_signup` is never changed – dbt only reads it.
